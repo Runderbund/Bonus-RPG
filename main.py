@@ -1,8 +1,14 @@
+"""
+At the moment, this is completely deterministic. Hercules wins every time,
+attacks have no range of damage, etc.
+I could make it branch, show health remaining, etc., but that's extra, and I'd want
+to use classes if I were going to expand the capabilities of this.
+"""
+
 import random
 
 def main():
-    hercules, troll, gryphon, rous = make_creatures()
-    tell_story(hercules, troll, gryphon, rous)
+    tell_story()
 
 def make_creatures():
     hercules = {"health":100, "att_power": 25, "attacks":["Punch", "Headbutt", "Kick", "Stern Gaze"]}
@@ -22,14 +28,15 @@ def offer_att_option(hercules):
     for i, attack in enumerate(hercules["attacks"], 1):
         print(f"{i}: {attack}")
     user_choice = int(input("\nWhich attack should Hercules use? ")) - 1
+    # Could add input checking
     return user_choice
 
 def hercules_attack(hercules, monster):
     att_choice = hercules["attacks"][offer_att_option(hercules)]
     att_power = hercules["att_power"]
     monster_name = monster["name"]
-    print (f"\nHercules attacks {monster_name} with {att_choice} for {att_power} damage!")
-    # Why can't I do "...attacks {monster["name"]} with ..."
+    print (f"\nHercules attacks the {monster_name} with {att_choice} for {att_power} damage!")
+        # Why can't I do "...attacks the {monster["name"]} with ..."
     monster["health"] -= att_power
 
 def monster_attack(hercules, monster):
@@ -40,7 +47,8 @@ def monster_attack(hercules, monster):
         print (f"The {monster_name} attacks Hercules with {attack_choice} for {att_power} damage!")
         hercules["health"] -= att_power
 
-def tell_story(hercules, troll, gryphon, rous):
+def tell_story():
+    hercules, troll, gryphon, rous = make_creatures()
     print ("Behold, the mighty Hercules sets forth on a mighty adventure!")
     
     print ("On his travels throughout the land, Hercules is accosted by a troll!")
@@ -51,10 +59,10 @@ def tell_story(hercules, troll, gryphon, rous):
     battle_monster(hercules, gryphon)
     print ("\nThe gryphon too falls under Hercules mighty swings.\n")
 
-
     print ("Finally, Hercules passes through the fire swamp, where a shadow lunges at him!")
     battle_monster(hercules, rous)
-    print ("\nHercules smashes the rodent and proves yet again that he fears no creature.\n")
-    print ("Victorious, Hercules grabs a burrito, and once again wonders why he put his fridge so far away.")
+    print ("\nHercules smashes the rodent and proves why he need fear no creature.\n")
+
+    print ("Victorious, Hercules grabs a gyro, and once again wonders why he put his icebox so far away.")
 
 main()
