@@ -34,7 +34,6 @@ def offer_att_option(hercules):
 def hercules_attack(hercules, monster):
     attack_choice = hercules["attacks"][offer_att_option(hercules)]
     print (f"\nHercules attacks the {monster['name']} with {attack_choice} for {hercules['att_power']} damage!")
-        # Why can't I do "...attacks the {monster["name"]} with ..."
     monster["health"] -= hercules['att_power']
 
 def monster_attack(hercules, monster):
